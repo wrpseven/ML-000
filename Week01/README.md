@@ -11,5 +11,9 @@ python的R包
 【本周作业】  
 环境安装  
 理解装饰器  
-数据处理的pipeline  
+数据处理的pipeline 
+
+【遇到的问题】  
+1、安装R的包失败：r-essentials
+2、colab没有找到GPU的设置
 
