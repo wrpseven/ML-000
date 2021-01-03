@@ -14,6 +14,6 @@ python的R包
 数据处理的pipeline 
 
 【遇到的问题】  
-1、安装R的包失败：r-essentials      //解决
-2、colab没有找到GPU的设置           //解决
+1、安装R的包失败：r-essentials      //解决   
+2、colab没有找到GPU的设置           //解决  
 
