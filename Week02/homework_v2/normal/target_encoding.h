@@ -34,26 +34,30 @@ public:
 };
 
 
-std::vector<double> target_encoding_cpp(double* data, const long nrow, const long ncol, const long ypos, const long xpos, double* result) {
-    
-    int unique_cnt = 10;
-    double* count_list = new double[unique_cnt]();
-    double* value_list = new double[unique_cnt]();
+int target_encoding_cpp(double* data, const long nrow, const long ncol, const long ypos, const long xpos, double* result) {
+
+    printf("check01");
+    int unique_cnt   = 11;
+    long* count_list = new long[unique_cnt]();
+    long* value_list = new long[unique_cnt]();
 
 
+    printf("check02");
     for(long i=0;i<nrow;i++){
-        xvalue = data[i*ncol+xpos];
-        yvalue = data[i*ncol+ypos];
+        long xvalue = (long)data[i*ncol+xpos];
+        long yvalue = (long)data[i*ncol+ypos];
         count_list[xvalue] += 1;
         value_list[xvalue] += yvalue;    
     }
 
+    printf("check03");
     for(long i=0;i<nrow;i++){
-        xvalue = data[i*ncol+xpos];
-        yvalue = data[i*ncol+ypos];
-        result[i]  = (value_list[xvalue] - yvalue)/(count_list[xvalue] - 1)
-    }    
+        long xvalue = (long)data[i*ncol+xpos];
+        long yvalue = (long)data[i*ncol+ypos];
+        result[i]  = (value_list[xvalue] - yvalue)/(count_list[xvalue] - 1);
+    }
 
+    printf("check04");
     if(count_list){
         delete []count_list;
     }

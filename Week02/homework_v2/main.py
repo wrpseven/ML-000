@@ -5,6 +5,7 @@ import time
 from line_profiler import LineProfiler
 from fdmutils.common import debug_line
 from fdmutils.common import get_tb_info
+import pdb
 
 from normal.lib.target_encoding import target_encoding
 
@@ -24,8 +25,8 @@ def target_mean_v4(data, y_name, x_name):
 
 
 def main():
-    y = np.random.randint(2, size=(5000, 1))
-    x = np.random.randint(10, size=(5000, 1))
+    y = np.random.randint(2, size=(500, 1))
+    x = np.random.randint(10, size=(500, 1))
     print("x.shape::",x.shape)
     print("y.shape::",y.shape)
     debug_line()
