@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import time
+from collections   import defaultdict
 from line_profiler import LineProfiler
 from fdmutils.common import debug_line
 from fdmutils.common import get_tb_info
@@ -36,7 +37,7 @@ def target_mean_v2(data, y_name, x_name):
 
 
 
-@profile
+#@profile
 def target_mean_v3(data, y_name, x_name):
     result = np.zeros(data.shape[0])
     
@@ -66,7 +67,19 @@ def target_mean_v3(data, y_name, x_name):
         result[i] = (value_dict[x_namevalue] - y_namevalue) / (count_dict[x_namevalue] - 1)
     return result
 
+def target_mean_v4(data, y_name, x_name):
+    n = data.shape[0]
+    X = data[x_name].values
+    Y = data[y_name].values
 
+    value_dict = defaultdict(lambda:0)
+    count_dict = defaultdict(lambda:0)
+
+    for x,y in zip(X,Y):
+        value_dict[x] += y
+        count_dict[x] += 1
+    result = [(value_dict[x]-y)/(count_dict[x]-1) for x,y in zip(X,Y)]
+    return result
 
 
 def main():
@@ -101,12 +114,19 @@ def main():
     print("target_mean_v3.cost %f" % (end-start))
     debug_line()
 
+    start = time.time()
+    result_4 = target_mean_v4(data, 'y', 'x')
+    end   = time.time()
+    print("target_mean_v4.cost %f" % (end-start))
+    debug_line()
 
 
     diff12 = np.linalg.norm(result_1 - result_2)
     print("diff12==",diff12)
     diff13 = np.linalg.norm(result_1 - result_3)
     print("diff13==",diff13)
+    diff14 = np.linalg.norm(result_1 - result_4)
+    print("diff14==",diff14)
 
 
 if __name__ == '__main__':

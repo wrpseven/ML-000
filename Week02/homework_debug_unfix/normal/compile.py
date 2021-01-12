@@ -5,11 +5,12 @@ from setuptools.extension import Extension
 import numpy
 
 compile_flags = ['-std=c++11']
+##compile_flags = ['-stdlib=libc++','-mmacosx-version-min=10.7']
 
 setup(
     ext_modules=cythonize(
         [
-            Extension('lib.target_encoding',     
+            Extension('lib.target_encoding_cpp',     
                       ['target_encoding.pyx'], 
                       languate='c++',
                       include_dirs=[numpy.get_include()],

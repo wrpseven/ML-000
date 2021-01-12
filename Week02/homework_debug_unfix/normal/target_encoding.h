@@ -34,7 +34,7 @@ public:
 };
 
 
-int target_encoding_cpp(double* data, const long nrow, const long ncol, const long ypos, const long xpos, double* result) {
+int target_encoding_cpp(long* data, const long nrow, const long ncol, const long ypos, const long xpos, double* result) {
 
     printf("check01");
     int unique_cnt   = 11;

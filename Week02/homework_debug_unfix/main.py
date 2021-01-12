@@ -7,7 +7,10 @@ from fdmutils.common import debug_line
 from fdmutils.common import get_tb_info
 import pdb
 
-from normal.lib.target_encoding import target_encoding
+from lib.target_encoding_cpp import target_encoding
+from lib.target_encoding_cpp import target_encoding_new
+
+
 
 def target_mean_v1(data, y_name, x_name):
     result = np.zeros(data.shape[0])
@@ -19,6 +22,10 @@ def target_mean_v1(data, y_name, x_name):
 
 def target_mean_v4(data, y_name, x_name):
     result = target_encoding(data, y_name, x_name)
+    return result
+
+def target_mean_v5(data, y_name, x_name):
+    result = target_encoding_new(data, y_name, x_name)
     return result
 
 
@@ -48,10 +55,25 @@ def main():
     end   = time.time()
     print("target_mean_v4.cost %f" % (end-start))
     debug_line()
+    if True:
+        print("result_4::",result_4[0:5])
+        debug_line()
+
+
+    start = time.time()
+    result_5 = target_mean_v5(data, 'y', 'x')
+    end   = time.time()
+    print("target_mean_v5.cost %f" % (end-start))
+    debug_line()
+    if True:
+        print("result_5::",result_5)
+        debug_line()
 
 
     diff14 = np.linalg.norm(result_1 - result_4)
     print("diff14==",diff14)
+    diff15 = np.linalg.norm(result_1 - result_5)
+    print("diff15==",diff15)
 
 
 if __name__ == '__main__':

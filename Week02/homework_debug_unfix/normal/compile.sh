@@ -31,3 +31,7 @@ find lib -name "*.so"|awk -F "${NAME}" '{print "mv "$0" "$1$2}'|sh
 
 ##清除不需要的文件
 rm -rf build
+
+##将so文件移动到指定目录
+mkdir -p  ../lib/
+mv  lib/* ../lib/
